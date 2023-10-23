@@ -154,6 +154,7 @@ class Instant extends Date {
       offsetYears = args.shift()
       if (args.length === 1) {throw new Error("TODO: new Instant(bigintms)")}
     }
+    // TODO: support string, number
     super(...args)
     if (isNaN(this)) {
       console.warn("Invalid time! Perhaps it was out of range. Have the first parameter be a bigint that is an offset in years", args)
@@ -166,6 +167,7 @@ class Instant extends Date {
 
   /// @return {bigint}
   valueOf () {
+    throw new Error("TODO")
     return BigInt(super.valueOf()) + offsetYears * 31556926_000n
   }
 
@@ -192,4 +194,23 @@ class Instant extends Date {
   toUTCString () {
     return offsetDateString(super.toUTCString(), this.offset)
   }
+
+  getYear () {
+    throw Error("deprecated! use getFullYear")
+  }
+
+  setYear () {
+    throw Error("deprecated! use setFullYear")
+  }
+
+  getFullYear () {
+    return BigInt(super.getFullYear()) + this.offset
+  }
+
+  setFullYear (year, month, day) {
+    super.setFullYear(Number(BigInt(year) - this.offset), month, day)
+    return this.valueOf()
+  }
 }
+
+
