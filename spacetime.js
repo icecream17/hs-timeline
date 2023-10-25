@@ -120,6 +120,9 @@ const HOUR = MINUTE * 60n
 // gets slower due to tidal forces associated with the moon.
 // https://en.wikipedia.org/wiki/Day_length_fluctuations
 // https://en.wikipedia.org/wiki/%CE%94T_(timekeeping)
+
+// However, the astronomical day doesn't matter. Instead we merely have 24 hours per clock day
+// as part of a sane society.
 const TAI_DAY = HOUR * 24n
 const COMMON_YEAR = TAI_DAY * 365n
 const LEAP_YEAR = COMMON_YEAR + TAI_DAY
@@ -132,7 +135,7 @@ const EARTH_YEAR = SECOND * 31556926n
 // 1/4 days + 1/128 days is matt parker's theoretically more accurate leap day to year allocation,
 // for simplicity over the current system which excludes every century except every four centuries (2000 is a leap year but 2100 isnt)
 
-// We will assume that Homestuck Earths have the same calendar system
+// We will assume that Homestuck Earths have the same calendar system, day lengths, etc.
 // and leap seconds and timezones are as in this universe
 
 function formatYear(bigint) {
@@ -146,10 +149,56 @@ function offsetDateString(repr, offset) {
   return repr.join(' ')
 }
 
+function isObject(val) {
+  return args[0] !== null && (typeof args[0] === "object" || typeof args[0] === "function")
+}
+
+function toPrimitive(val) {
+  if (!isObject(val)) return val
+  if (args[0][Symbol.toPrimitive] === undefined) {
+    return Date.prototype[Symbol.toPrimitive].apply(obj, "number")
+  } else {
+    const result = args[0][Symbol.toPrimitive]("default")
+    if (isObject(result)) {
+      throw new TypeError("Object to non object conversion failed")
+    }
+    return result
+  }
+}
+
 // An instant is immutable
-class Instant extends Date {
+const Instant = new Proxy(class Instant extends Date {
   constructor (...args) {
-    let offsetYears = 0n
+    let dv
+    let hundredMillionDayOffsets = 0
+    switch (args.length) {
+      case 0: break;
+      // incidentally, the only way for Date to contain a value outside of the intended range is for
+      // there to be 0 args and the current time to be outside the range
+      case 1: {
+        const val = args[0]
+        if (val instanceof Date) {
+          dv = Date.prototype.valueOf.apply(val)
+        } else {
+          const v = toPrimitive(val)
+          if (typeof v === "string") {
+            dv = Instant.parse(v)
+          } else if (typeof v === "number") {
+            dv = v % 8_640_000_000_000_000
+            hundredMillionDayOffsets = (v - dv) / 8_640_000_000_000_000
+          } else if (typeof v === "bigint") {
+            dv = v % 8_640_000_000_000_000n
+            hundredMillionDayOffsets = (v - dv) / 8_640_000_000_000_000n
+          } else {
+            dv = +v
+          }
+        }
+        break;
+      }
+      default: {
+        
+      }
+    }
     if (typeof args[0] === "bigint") {
       offsetYears = args.shift()
       if (args.length === 1) {throw new Error("TODO: new Instant(bigintms)")}
@@ -211,6 +260,10 @@ class Instant extends Date {
     super.setFullYear(Number(BigInt(year) - this.offset), month, day)
     return this.valueOf()
   }
-}
+}, {
+  apply(target, thisArg, argumentsList) {
+    return Date()
+  }
+})
 
 
