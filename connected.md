@@ -6,15 +6,17 @@ For example, Sans is in Super Smash Bros Ultimate, but that doesn't really count
 
 Another example is strawberry cake. Strawberry cake is soo good. No wonder it is used soo often. (Portal, SM64, Celeste, To the Stars)
 
-## Dweller's Empty Path
+"-->" means "references"
 
-1. Undertale --> Homestuck
-2. Deltarune --> Undertale
-3. Dweller's Empty Path --> Deltarune
+## Strong connections
 
-Probably the least suprising connection
+1. Earthbound <-- Homestuck
+1. Undertale <-> Homestuck
+1. Deltarune <-> Undertale
+1. Dweller's Empty Path <-- Deltarune
 
 ## Among us
 
 1. Homestuck --> Ace Attorney
-2. Among us <--> Ace Attorney (through fanon: <https://www.youtu.be/5zs8YnbimZY>)
+1. Among us <- <https://www.youtu.be/5zs8YnbimZY> -> Ace Attorney
+1. Among us <- <https://www.youtu.be/IwFtWJ8miG8> <-- <https://canary.discord.com/channels/705084182673621033/1008175755756326982/1267901677625937920> --> jerma (aa-ee-oo) <-- vaguely similar --> Hatsune Miku (oo-ee-oo)
