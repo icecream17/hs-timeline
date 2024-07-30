@@ -18,5 +18,5 @@ Another example is strawberry cake. Strawberry cake is soo good. No wonder it is
 ## Among us
 
 1. Homestuck --> Ace Attorney
-1. Among us <- <https://www.youtu.be/5zs8YnbimZY> -> Ace Attorney
-1. Among us <- <https://www.youtu.be/IwFtWJ8miG8> <-- <https://canary.discord.com/channels/705084182673621033/1008175755756326982/1267901677625937920> --> jerma (aa-ee-oo) <-- vaguely similar --> Hatsune Miku (oo-ee-oo)
+1. Among us & Ace Attorney <- <https://www.youtu.be/5zs8YnbimZY>
+1. Among us & Friday Night Funkin' <- <https://www.youtu.be/IwFtWJ8miG8> <-- <https://canary.discord.com/channels/705084182673621033/1008175755756326982/1267901677625937920> --> jerma (aa-ee-oo) <-- vaguely similar --> Hatsune Miku (oo-ee-oo)
